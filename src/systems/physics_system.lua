@@ -13,7 +13,7 @@ function PhysicsSystem:update(entities, dt)
 	for entityKey,entity in pairs(entities) do
 		local pos = entity:getComponentByClass(PositionComponent)
 		local phys = entity:getComponentByClass(PhysicsComponent)
-		pos:setX(pos:getX()+(phys:getVelocityX()*dt))
-		pos:setY(pos:getY()+(phys:getVelocityY()*dt))
+		pos.x = pos.x + (phys.velocityX * dt)
+		pos.y = pos.y + (phys.velocityY * dt)
 	end
 end

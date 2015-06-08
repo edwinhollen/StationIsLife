@@ -86,7 +86,11 @@ function Entity:hasComponentOfType(requestedClass)
 end
 
 function Entity:getComponentByClass(requestedClass)
-	return self:getComponentsByClass(requestedClass)[1]
+	for componentKey, component in pairs(self.components) do
+		if component:isInstanceOf(requestedClass) then
+			return component
+		end
+	end
 end
 
 function Entity:getComponentsByClass(requestedClass)
@@ -98,3 +102,4 @@ function Entity:getComponentsByClass(requestedClass)
 	end
 	return returnComponents
 end
+
