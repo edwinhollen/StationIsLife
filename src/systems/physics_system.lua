@@ -6,7 +6,7 @@ require "components/physics_component"
 PhysicsSystem = class("PhysicsSystem", System)
 
 function PhysicsSystem:initialize(newVelocityX, newVelocityY)
-	System.initialize(self, {PositionComponent})
+	System.initialize(self, {PositionComponent, PhysicsComponent})
 end
 
 function PhysicsSystem:update(entities, dt)
