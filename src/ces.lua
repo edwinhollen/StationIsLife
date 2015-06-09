@@ -1,14 +1,21 @@
 local class = require("middleclass")
+require "systems/physics_system"
+require "systems/shape_system"
+require "systems/image_system"
 
 --
 -- ComponentEntitySystem
 --
 ComponentEntitySystem = class("ComponentEntitySystem")
 
-function ComponentEntitySystem:initialize(initialSystems, initialEntities)
+function ComponentEntitySystem:initialize(initialEntities, initialSystems)
 	print("Creating CES...")
 	self.entities = initialEntities or {}
-	self.systems = initialSystems or {}
+	self.systems = initialSystems or {
+	 PhysicsSystem:new(),
+	 ShapeSystem:new(),
+	 ImageSystem:new()
+	}
 end
 
 function ComponentEntitySystem:addEntity(newEntity)
@@ -21,13 +28,13 @@ end
 
 function ComponentEntitySystem:getFilteredEntities()
 	local returnList = {}
-	for systemKey, system in pairs(self.systems) do
+	for systemKey, system in ipairs(self.systems) do
 		local obj = {}
 		obj["system"] = system
 		obj["entities"] = {}
-		for entityKey, entity in pairs(self.entities) do
+		for entityKey, entity in ipairs(self.entities) do
 			local hasAcceptableComponents = true
-			for componentClassKey, componentClass in pairs(system:getAcceptableComponents()) do
+			for componentClassKey, componentClass in ipairs(obj["system"].acceptableComponents) do
 				if not entity:hasComponentOfType(componentClass) then
 					hasAcceptableComponents = false
 					break
@@ -41,68 +48,3 @@ function ComponentEntitySystem:getFilteredEntities()
 	end
 	return returnList
 end
-
---
--- System
---
-System = class('System')
-
-function System:initialize(acceptableComponents)
-	self.acceptableComponents = acceptableComponents or {}
-end
-
-function System:acceptsComponent(component)
-	for acceptableComponentKey, acceptableComponent in pairs(self.acceptableComponents) do
-		if Object.isInstanceOf(component, acceptableComponent) then
-			return true
-		end
-	end
-	return false
-end
-
-function System:getAcceptableComponents()
-	return self.acceptableComponents
-end
-function System:update(entities, dt) end
-function System:draw(entities) end
-
---
--- Entity
---
-Entity = class('Entity')
-
-function Entity:initialize(newComponents)
-	self.components = newComponents or {}
-end
-
-function Entity:addComponent(newComponent)
-	self.components.insert(newComponent)
-end
-
-function Entity:hasComponentOfType(requestedClass)
-	for componentKey, component in pairs(self.components) do
-		if component:isInstanceOf(requestedClass) then
-			return true
-		end
-	end
-	return false
-end
-
-function Entity:getComponentByClass(requestedClass)
-	for componentKey, component in pairs(self.components) do
-		if component:isInstanceOf(requestedClass) then
-			return component
-		end
-	end
-end
-
-function Entity:getComponentsByClass(requestedClass)
-	local returnComponents = {}
-	for componentKey, component in pairs(self.components) do
-		if component:isInstanceOf(requestedClass) then
-			table.insert(returnComponents, component)
-		end
-	end
-	return returnComponents
-end
-

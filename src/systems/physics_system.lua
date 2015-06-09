@@ -1,5 +1,5 @@
 local class = require "middleclass"
-require "ces"
+require "system"
 require "components/position_component"
 require "components/physics_component"
 
