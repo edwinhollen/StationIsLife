@@ -29,8 +29,8 @@ function TitleScene:initialize()
   end
   -- title
   self.ces:addEntity(Entity:new({
-    PositionComponent:new(400/2, 300/2),
-    UILabelComponent:new("Station\nis\nLife", "center")
+    PositionComponent:new(400/2, 300/2-20),
+    UILabelComponent:new("Station is Life", "center", 800, "font_huge")
   }))
 
 end

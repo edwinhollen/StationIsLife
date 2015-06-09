@@ -10,9 +10,10 @@ end
 -- Label component
 --
 UILabelComponent = class("UILabelComponent", UIComponent)
-function UILabelComponent:initialize(newText, newAlign, newLimit)
+function UILabelComponent:initialize(newText, newAlign, newLimit, newFont)
   UIComponent.initialize(self)
   self.text = newText or ""
   self.align = newAlign or "left" -- "left", "center", "right"
-  self.limit = newLimit or 0
+  self.limit = newLimit or 800
+  self.font = newFont or "font_regular"
 end
