@@ -2,6 +2,7 @@ local class = require("middleclass")
 require "systems/physics_system"
 require "systems/shape_system"
 require "systems/image_system"
+require "systems/ui_system"
 
 --
 -- ComponentEntitySystem
@@ -14,7 +15,8 @@ function ComponentEntitySystem:initialize(initialEntities, initialSystems)
 	self.systems = initialSystems or {
 	 PhysicsSystem:new(),
 	 ShapeSystem:new(),
-	 ImageSystem:new()
+	 ImageSystem:new(),
+	 UISystem:new()
 	}
 end
 
