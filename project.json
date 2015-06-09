@@ -1,6 +1,6 @@
 {
 	"name": "StationIsLife",
 	"version": "0.0",
-	"sources": ["src/", "images/"],
+	"sources": ["src/", "assets/"],
 	"output": "build/"
 }

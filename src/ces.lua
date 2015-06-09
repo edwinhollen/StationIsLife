@@ -22,7 +22,9 @@ end
 function ComponentEntitySystem:getFilteredEntities()
 	local returnList = {}
 	for systemKey, system in pairs(self.systems) do
-		returnList[system] = {}
+		local obj = {}
+		obj["system"] = system
+		obj["entities"] = {}
 		for entityKey, entity in pairs(self.entities) do
 			local hasAcceptableComponents = true
 			for componentClassKey, componentClass in pairs(system:getAcceptableComponents()) do
@@ -32,9 +34,10 @@ function ComponentEntitySystem:getFilteredEntities()
 				end
 			end
 			if hasAcceptableComponents then
-				table.insert(returnList[system], entity)
+				table.insert(obj["entities"], entity)
 			end
 		end
+		table.insert(returnList, obj)
 	end
 	return returnList
 end

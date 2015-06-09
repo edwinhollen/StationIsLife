@@ -1,0 +1,32 @@
+{
+    "images": {
+        "star_tiny": {
+            "image": "starsheet.png",
+            "x": 0,
+            "y": 3,
+            "width": 1,
+            "height": 1
+        },
+        "star_small": {
+            "image": "starsheet.png",
+            "x": 2,
+            "y": 2,
+            "width": 3,
+            "height": 3
+        },
+        "star_medium": {
+            "image": "starsheet.png",
+            "x": 6,
+            "y": 1,
+            "width": 3,
+            "height": 5
+        },
+        "star_large": {
+            "image": "starsheet.png",
+            "x": 10,
+            "y": 0,
+            "width": 3,
+            "height":  7
+        }
+    }
+}

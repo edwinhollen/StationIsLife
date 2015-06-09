@@ -11,7 +11,7 @@ end
 --
 RectangleShapeComponent = class("RectangleShapeComponent", ShapeComponent)
 function RectangleShapeComponent:initialize(newWidth, newHeight, newColor)
-  ShapeComponent:initialize()
+  ShapeComponent:initialize(newColor)
   self.width = newWidth or 0
   self.height = newHeight or 0
 end
@@ -21,6 +21,6 @@ end
 --
 CircleShapeComponent = class("CircleShapeComponent", ShapeComponent)
 function CircleShapeComponent:initialize(newRadius, newColor)
-  ShapeComponent:initialize()
+  ShapeComponent:initialize(newColor)
   self.radius = newRadius or 0
 end

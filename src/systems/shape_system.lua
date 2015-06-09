@@ -13,28 +13,22 @@ function ShapeSystem:update(entities, dt)
 end
 
 function ShapeSystem:draw(entities)
+  local scale = (800/400)
   for entityKey, entity in pairs(entities) do
     local pos = entity:getComponentByClass(PositionComponent)
     local shape = entity:getComponentByClass(ShapeComponent)
+    love.graphics.setColor(shape.color.r, shape.color.g, shape.color.b, shape.color.a)
+    local xPos = math.floor(pos.x * scale + 0.5)
+    local yPos = math.floor(pos.y * scale + 0.5)
     if shape:isInstanceOf(RectangleShapeComponent) then
       -- draw rectangle
       local rect = entity:getComponentByClass(RectangleShapeComponent)
-      local vertices = {
-        pos.x, pos.y,
-        pos.x+rect.width, pos.y,
-        pos.x+rect.width, pos.y+rect.height,
-        pos.x, pos.y+rect.height
-      }
-      love.graphics.setColor(rect.color.r, rect.color.g, rect.color.b, rect.color.a)
-      love.graphics.polygon("fill", vertices)
-      
+      love.graphics.rectangle("fill", xPos, yPos, rect.width * scale, rect.height * scale)
     elseif shape:isInstanceOf(CircleShapeComponent) then
       -- draw circle
       local circ = entity:getComponentByClass(CircleShapeComponent)
-      love.graphics.setColor(circ.color.r, circ.color.g, circ.color.b, circ.color.a)
-      love.graphics.circle("fill", pos.x, pos.y, circ.radius, 16)
+      love.graphics.circle("fill", xPos, yPos, circ.radius*scale, 16)
     end
-    
     love.graphics.setColor(255, 255, 255, 255)
   end
 end
